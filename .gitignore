@@ -1,0 +1,29 @@
+# Compiled C binary
+retire
+retire.exe
+
+# Object files from multi-file build
+*.o
+
+# Generated output files
+retirement.csv
+retirement.xlsx
+retirement_*.xlsx
+retirement_plan_*.docx
+saved_rrsp_withdrawals_*.csv
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# macOS
+.DS_Store
+
+# Editor / IDE — exclude personal settings but commit shared build config
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo

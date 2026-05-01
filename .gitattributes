@@ -1,0 +1,29 @@
+# Default: auto-detect text files and normalize to LF on commit + checkout.
+* text=auto eol=lf
+
+# Files that Windows tooling genuinely requires as CRLF.
+*.sln   text eol=crlf
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.ps1   text eol=crlf
+
+# Explicit binary types — never touch line endings or try to diff.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.pdf   binary
+*.xlsx  binary
+*.xlsm  binary
+*.xls   binary
+*.docx  binary
+*.doc   binary
+*.pptx  binary
+*.ppt   binary
+*.zip   binary
+*.gz    binary
+*.exe   binary
+*.dll   binary
+*.o     binary
+*.obj   binary
