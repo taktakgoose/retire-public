@@ -179,24 +179,37 @@ updated seed file for the next pass.
 
 ## Customising the simulation
 
-All key parameters are defined as `#define` constants in `params.h`:
+`scenario.h` is the primary file to edit. It contains all the personal and
+financial parameters you'll adjust regularly:
 
 | Constant | Description |
 |---|---|
 | `CURRENT_YEAR` / `DEATH_YEAR` | Simulation time span |
+| `RALPH_YOB` / `SARAH_YOB` | Spouse birth years |
+| `RALPH_RETIREMENT_YEAR` / `SARAH_RETIREMENT_YEAR` | Retirement dates |
 | `STARTING_RALPH_RRSP` etc. | Starting account balances |
 | `RALPH_SALARY` / `SARAH_SALARY` | Annual salaries |
 | `RALPH_GROWTH_RATE` / `SARAH_GROWTH_RATE` etc. | Asset growth rates |
 | `FINANCIAL_RETURN_VOLATILITY` etc. | Asset-class return volatility assumptions |
 | `GO_GO_SPENDING` / `SLOW_GO_SPENDING` etc. | Projected yearly spending by phase |
 
-Edit the constants in `params.h` and recompile to model different scenarios.
+`constants.h` holds stable values that change only when legislation changes —
+tax rates, CRA limits (TFSA room, RRSP annual limit), capital-gains inclusion
+rates, BPA amounts, and OAS/CPP survivor rules. You shouldn't need to touch
+this file between scenario runs.
+
+`params.h` is a thin shim that includes both files; existing tooling that
+references `params.h` continues to work without modification.
+
+Edit the constants in `scenario.h` and recompile to model different scenarios.
 
 ## Project structure
 
 ```
 retirement-sim/
-├── params.h                    # Simulation parameters (#define constants)
+├── scenario.h                  # Personal parameters — edit for each scenario
+├── constants.h                 # Tax rules and regulatory constants
+├── params.h                    # Shim: #includes scenario.h and constants.h
 ├── types.h                     # Shared structs and enums
 ├── tax.h / tax.c               # Tax brackets, credits, and OAS clawback
 ├── tables.h / tables.c         # LIF and RRIF regulatory rate tables

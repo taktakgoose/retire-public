@@ -849,13 +849,21 @@ ASSUMPTION_SECTIONS = [
 ]
 
 
-def parse_params_h(params_path):
-    """Parse #define constants from params.h, returning {name: numeric_value}."""
-    defines = {}
-    if not os.path.exists(params_path):
-        return defines
-    with open(params_path, encoding="utf-8") as f:
+def _parse_header(path, defines, visited):
+    """Recursively parse a C header, following local #include "..." directives."""
+    path = os.path.abspath(path)
+    if path in visited or not os.path.exists(path):
+        return
+    visited.add(path)
+    base_dir = os.path.dirname(path)
+    with open(path, encoding="utf-8") as f:
         for line in f:
+            # Follow local includes so a shim like params.h (which just
+            # #includes scenario.h and constants.h) is handled transparently.
+            inc = re.match(r'^\s*#include\s+"([^"]+)"', line)
+            if inc:
+                _parse_header(os.path.join(base_dir, inc.group(1)), defines, visited)
+                continue
             m = re.match(r'^\s*#define\s+(\w+)\s+(.*)', line)
             if not m:
                 continue
@@ -870,6 +878,16 @@ def parse_params_h(params_path):
                 defines[name] = int(f_val) if f_val.is_integer() else f_val
             except Exception:
                 pass   # skip non-numeric / expression defines
+
+
+def parse_params_h(params_path):
+    """Parse #define constants from a C header, returning {name: numeric_value}.
+
+    Follows local #include "..." directives, so params.h can be a thin shim
+    that pulls in scenario.h and constants.h without breaking the parser.
+    """
+    defines = {}
+    _parse_header(params_path, defines, set())
     return defines
 
 

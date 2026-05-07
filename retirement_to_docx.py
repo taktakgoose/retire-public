@@ -163,8 +163,8 @@ SARAH_CPP_START_AGE     = int(_p('SARAH_CPP_START_AGE',    70))
 OAS_START_AGE          = int(_p('OAS_START_AGE',         70))
 
 # Family — used for life milestone banners
-SCARLET_BIRTH_YEAR     = 2009
-VIOLET_BIRTH_YEAR      = 2012
+MAGGIE_BIRTH_YEAR      = 2009
+TODD_BIRTH_YEAR        = 2012
 # High school in Ontario: grades 9–12 (4 years).
 # A child born in year Y enters grade 9 in September of year Y+14.
 _HS_ENTRY_OFFSET       = 14   # age at which grade 9 begins
@@ -528,8 +528,8 @@ def compute_all_milestones(moonbrook_sale_year, robertson_payoff_year, moonbrook
         add(SARAH_RETIREMENT_YEAR,  '\U0001f3e6  Sarah retires')
 
     # ---- Children ----
-    for name, birth in (('Scarlet', SCARLET_BIRTH_YEAR),
-                        ('Violet',  VIOLET_BIRTH_YEAR)):
+    for name, birth in (('Maggie', MAGGIE_BIRTH_YEAR),
+                        ('Todd',   TODD_BIRTH_YEAR)):
         hs_start  = birth + _HS_ENTRY_OFFSET          # Sept of grade-9 year
         hs_end    = hs_start + _HS_YEARS               # June of grade-12 year
         univ_end  = hs_end   + _UNIV_YEARS
@@ -744,8 +744,8 @@ def build_contacts_page(doc):
         ('Bank \u2014 Branch Manager',       ''),
         ('Service Canada (CPP / OAS)',       '1-800-277-9914'),
         ('CRA Individual Enquiries',         '1-800-959-8281'),
-        ('Scarlet',                    ''),
-        ('Violet',                     ''),
+        ('Maggie',                     ''),
+        ('Todd',                       ''),
         ('Trusted Neighbour / Friend', 'Physically nearby; can check in and drive to appointments.'),
     ]
 

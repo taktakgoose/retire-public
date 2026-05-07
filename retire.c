@@ -186,7 +186,7 @@ static double no_go_spending_pct   = ((double)NO_GO_SPENDING   / (double)SLOW_GO
 static spouse_t ralph_template = {
     .name     = "Ralph",
     .id       = RALPH_IDX,
-    .yob      = 1979,
+    .yob      = RALPH_YOB,
     .yor      = RALPH_RETIREMENT_YEAR,
     .salary   = RALPH_SALARY,
     /* Remaining salary: months still worked from CURRENT_MONTH up to
@@ -209,7 +209,7 @@ static spouse_t ralph_template = {
 static spouse_t sarah_template = {
     .name     = "Sarah",
     .id       = SARAH_IDX,
-    .yob      = 1972,
+    .yob      = SARAH_YOB,
     .yor      = SARAH_RETIREMENT_YEAR,
     .salary   = SARAH_SALARY,
     /* Remaining salary: months still worked from CURRENT_MONTH up to
